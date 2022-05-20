@@ -36,7 +36,7 @@ RSpec.describe "Sessions", type: :request do
       post '/sessions', params: { username: user.username, password: 'sample_password' }
       expect(response).to have_http_status(:created)
 
-      delete "/sessions/#{user.id}"
+      delete "/logout"
       expect(response).to have_http_status(:ok)
     end
   end
