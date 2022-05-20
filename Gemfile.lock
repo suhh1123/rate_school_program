@@ -90,6 +90,7 @@ GEM
     io-console (0.5.11)
     irb (1.4.1)
       reline (>= 0.3.0)
+    jsonapi_errors_handler (0.5.0)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -190,6 +191,7 @@ DEPENDENCIES
   bootsnap
   debug
   factory_bot_rails
+  jsonapi_errors_handler
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.3)
