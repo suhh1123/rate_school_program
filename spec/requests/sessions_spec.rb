@@ -43,7 +43,7 @@ RSpec.describe "Sessions", type: :request do
   end
 
   describe "POST /delete" do
-    it 'returns ok status' do
+    it 'reset the session and cookie then returns ok status' do
       post '/sessions', params: { username: user.username, password: 'sample_password' }
       expect(response).to have_http_status(:created)
 
@@ -62,7 +62,6 @@ RSpec.describe "Sessions", type: :request do
         expect(response).to have_http_status(:created)
 
         get '/logged_in'
-        expected = json_data
         expected = json_data
         expect(expected[:type]).to eq('users')
         expect(expected[:attributes]).to eq({
