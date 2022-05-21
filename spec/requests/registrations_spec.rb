@@ -20,11 +20,11 @@ RSpec.describe "Registrations", type: :request do
           }
         }
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(JSON.parse(response.body).deep_symbolize_keys). to eq(
-                                                                    {
-                                                                      error: "Validation failed: Username can't be blank"
-                                                                    }
-                                                                  )
+        expect(json). to eq(
+                           {
+                             error: "Validation failed: Username can't be blank"
+                           }
+                         )
       end
     end
 
@@ -40,11 +40,11 @@ RSpec.describe "Registrations", type: :request do
           }
         }
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(JSON.parse(response.body).deep_symbolize_keys).to eq(
-                                                                   {
-                                                                     error: "Validation failed: Email has already been taken, Username has already been taken"
-                                                                   }
-                                                                 )
+        expect(json).to eq(
+                          {
+                            error: "Validation failed: Email has already been taken, Username has already been taken"
+                          }
+                        )
       end
     end
 
@@ -60,6 +60,14 @@ RSpec.describe "Registrations", type: :request do
           }
         }
         expect(response).to have_http_status(:created)
+        expected = json_data
+        expect(expected[:type]).to eq('users')
+        expect(expected[:attributes]).to eq({
+                                              "first-name": 'sample_f_name_2',
+                                              "last-name": 'sample_l_name_2',
+                                              email: 'sample_email_2',
+                                              username: 'sample_username_2'
+                                            })
       end
     end
   end

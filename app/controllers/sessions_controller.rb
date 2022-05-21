@@ -9,21 +9,19 @@ class SessionsController < ApplicationController
       cookies[:username] = user.username
       render json: user, status: :created
     else
-      render json: user.errors.messages, status: :unprocessable_entity
+      render json: { login: false }, status: :unprocessable_entity
     end
   end
 
   def logout
     reset_session
-    render json: 'logout successfully', status: :ok
+    cookies.delete :username
+    render json: { logout: true }, status: :ok
   end
 
   def logged_in
     if @current_user
-      render json: {
-        logged_in: true,
-        user: @current_user
-      }
+      render json: @current_user
     else
       render json: {
         logged_in: false

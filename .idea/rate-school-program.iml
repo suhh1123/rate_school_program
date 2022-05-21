@@ -34,6 +34,7 @@
     <orderEntry type="library" scope="PROVIDED" name="actionpack (v7.0.3, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actiontext (v7.0.3, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionview (v7.0.3, RVM: ruby-3.1.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="active_model_serializers (v0.10.13, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activejob (v7.0.3, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activemodel (v7.0.3, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activerecord (v7.0.3, RVM: ruby-3.1.1) [gem]" level="application" />
@@ -43,6 +44,7 @@
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.11.1, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.3.10, RVM: ruby-3.1.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="case_transform (v0.2, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.1.10, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.5.0, RVM: ruby-3.1.1) [gem]" level="application" />
@@ -55,7 +57,7 @@
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.10.0, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="io-console (v0.5.11, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="irb (v1.4.1, RVM: ruby-3.1.1) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="jsonapi_errors_handler (v0.5.0, RVM: ruby-3.1.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jsonapi-renderer (v0.2.2, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.18.0, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.7.1, RVM: ruby-3.1.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="marcel (v1.0.2, RVM: ruby-3.1.1) [gem]" level="application" />
@@ -134,6 +136,7 @@
         <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="serializer" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
@@ -187,6 +190,7 @@
         <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="serializer" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
