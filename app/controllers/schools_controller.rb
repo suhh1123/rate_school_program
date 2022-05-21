@@ -7,7 +7,7 @@ class SchoolsController < ApplicationController
     else
       schools = School.all
     end
-    render json: schools, status: :ok
+    paginate json: schools, per_page: 1, status: :ok
   end
 
   def create

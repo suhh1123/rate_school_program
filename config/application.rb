@@ -36,6 +36,7 @@ module RateSchoolProgram
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # serializer adapter
     ActiveModelSerializers.config.adapter = ActiveModelSerializers::Adapter::JsonApi
   end
 end
