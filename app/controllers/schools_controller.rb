@@ -1,5 +1,4 @@
 class SchoolsController < ApplicationController
-  after_action { pagy_headers_merge(@pagy) if @pagy }
 
   def index
     if params[:country] && params[:state]
