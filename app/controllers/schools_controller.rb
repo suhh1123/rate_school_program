@@ -1,5 +1,4 @@
 class SchoolsController < ApplicationController
-
   def index
     if params[:country] && params[:state]
       schools = School.where(country: params[:country], state: params[:state])
