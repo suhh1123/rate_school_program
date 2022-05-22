@@ -9,7 +9,7 @@ class SchoolsController < ApplicationController
       schools = School.all
     end
     @pagy, @records = pagy(schools)
-    render json: @records
+    render json: @records, status: :ok
   end
 
   def create

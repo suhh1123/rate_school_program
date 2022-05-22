@@ -3,14 +3,10 @@ require 'rails_helper'
 RSpec.describe "Schools", type: :request do
   describe "GET /index" do
     context 'no filter is passed' do
-      it 'returns a success response' do
-        get '/schools'
-        expect(response).to have_http_status(:ok)
-      end
-
       it 'returns a proper JSON' do
         school = FactoryBot.create :school
         get '/schools'
+        expect(response).to have_http_status(:ok)
         expected = json_data.first
         expect(expected[:id]).to eq(school.id.to_s)
         expect(expected[:type]).to eq('schools')
@@ -63,54 +59,42 @@ RSpec.describe "Schools", type: :request do
   end
 
   describe "POST /create" do
+    let(:school_params) {
+      {
+        school: {
+          name: 'sample_name',
+          address: 'sample_address',
+          city: 'sample_city',
+          state: 'sample_state',
+          zipcode: 10027,
+          country: 'sample_country'
+        }
+      }
+    }
 
     context 'when school name is missing' do
-      it 'returns an error' do
-        post '/schools', params: {
-          school: {
-            address: 'sample_address',
-            city: 'sample_city',
-            state: 'sample_state',
-            zipcode: 10027,
-            country: 'sample_country'
-          }
-        }
+      it 'returns a unprocessable_entity error' do
+        school_params[:school].delete(:name)
+        post '/schools', params: school_params
         expect(response).to have_http_status(:unprocessable_entity)
         expect(json[:error]).to include("Name can't be blank")
       end
     end
 
-    context 'when school name has already exists' do
-      it 'returns an error' do
+    context 'when school name has already existed' do
+      it 'returns a unprocessable_entity error' do
         school = FactoryBot.create :school
-        post '/schools', params: {
-          school: {
-            name: school.name,
-            address: 'sample_address',
-            city: 'sample_city',
-            state: 'sample_state',
-            zipcode: 10027,
-            country: 'sample_country'
-          }
-        }
+        school_params[:school][:name] = school.name
+        post '/schools', params: school_params
         expect(response).to have_http_status(:unprocessable_entity)
         expect(json[:error]).to include("Name has already been taken")
       end
     end
 
     context 'when school params are all valid and not missing' do
-      it 'returns the created school' do
+      it 'returns a created status' do
         expect {
-          post '/schools', params: {
-            school: {
-              name: 'sample_name_1',
-              address: 'sample_address',
-              city: 'sample_city',
-              state: 'sample_state',
-              zipcode: 10027,
-              country: 'sample_country'
-            }
-          }
+          post '/schools', params: school_params
         }.to change {School.count}.from(0).to(1)
         expect(response).to have_http_status(:created)
       end
@@ -119,7 +103,7 @@ RSpec.describe "Schools", type: :request do
 
   describe "GET /show" do
     context 'when the given id is invalid' do
-      it 'returns an error' do
+      it 'returns a not-found error' do
         FactoryBot.create :school
         get '/schools/10'
         expect(response).to have_http_status(:not_found)
@@ -127,7 +111,7 @@ RSpec.describe "Schools", type: :request do
     end
 
     context 'when the given id is valid' do
-      it 'returns the matched school' do
+      it 'returns a ok status' do
         school = FactoryBot.create :school
         get "/schools/#{school.id}"
         expect(response).to have_http_status(:ok)

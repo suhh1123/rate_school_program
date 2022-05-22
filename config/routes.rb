@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   get :logged_in, to: "sessions#logged_in"
 
   resources :schools, only: [:index, :create, :show]
+
+  resources :schools do
+    resources :programs, only: [:index, :create, :show]
+  end
 end
