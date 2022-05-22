@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include Pagy::Backend
+
   before_action :set_current_user
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found

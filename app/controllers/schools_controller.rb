@@ -1,4 +1,6 @@
 class SchoolsController < ApplicationController
+  after_action { pagy_headers_merge(@pagy) if @pagy }
+
   def index
     if params[:country] && params[:state]
       schools = School.where(country: params[:country], state: params[:state])
@@ -7,7 +9,8 @@ class SchoolsController < ApplicationController
     else
       schools = School.all
     end
-    paginate json: schools, per_page: 1, status: :ok
+    @pagy, @records = pagy(schools)
+    render json: @records
   end
 
   def create
