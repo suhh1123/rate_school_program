@@ -95,32 +95,39 @@ RSpec.describe "Programs", type: :request do
   end
 
   describe "GET /show" do
-    let(:school) { school = FactoryBot.create :school }
+    let!(:school) { school = FactoryBot.create :school }
 
-    let(:program) do
+    let!(:program) do
       program = FactoryBot.build :program
       program.school = school
       program.save
       program
     end
 
-    context 'when the school and program do not exist' do
-      it 'returns a not-found error' do
-        get "/schools/#{school.id + 1}/programs/#{program.id}"
-        expect(response).to have_http_status(:not_found)
+    context 'when the program id param is provided' do
+      context 'when the program does not exist' do
+        it 'returns a not-found error' do
+          get "/programs/#{program.id + 1}"
+          expect(response).to have_http_status(:not_found)
+        end
+      end
 
-        get "/schools/#{school.id}/programs/#{program.id + 1}"
-        expect(response).to have_http_status(:not_found)
-
-        get "/schools/#{school.id + 1}/programs/#{program.id + 1}"
-        expect(response).to have_http_status(:not_found)
+      context 'when the program exists' do
+        it 'returns a ok status' do
+          get "/programs/#{program.id}"
+          expect(response).to have_http_status(:ok)
+        end
       end
     end
 
-    context 'when the school and program exist' do
-      it 'returns a ok status' do
-        get "/schools/#{school.id}/programs/#{program.id}"
+    context 'when the program id param is not provided' do
+      it 'returns all programs in pagination' do
+        second_program = FactoryBot.build :program
+        second_program.school = school
+        second_program.save
+        get "/programs"
         expect(response).to have_http_status(:ok)
+        expect(json_data.length).to eq(2)
       end
     end
   end

@@ -1,12 +1,9 @@
 class ProgramsController < ApplicationController
   def index
-    programs = Program.where(school_id: params[:school_id])
-    if programs.empty?
-      raise ActiveRecord::RecordNotFound.new 'record not found'
-    else
-      @pagy, @record = pagy(programs)
-      render json: @record, status: :ok
-    end
+    school = School.find_by!(id: params[:school_id])
+    programs = school.programs
+    @pagy, @record = pagy(programs)
+    render json: @record, status: :ok
   end
 
   def create
@@ -18,8 +15,14 @@ class ProgramsController < ApplicationController
   end
 
   def show
-    program = Program.find_by!(id: params[:id], school_id: params[:school_id])
-    render json: program, status: :ok
+    if params.has_key? :id
+      program = Program.find_by!(id: params[:id])
+      render json: program, status: :ok
+    else
+      programs = Program.all
+      @pagy, @record = pagy(programs)
+      render json: @record, status: :ok
+    end
   end
 
   private
