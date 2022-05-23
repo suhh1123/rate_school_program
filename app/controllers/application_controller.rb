@@ -34,7 +34,7 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def logged_in?
+  def authenticate_user
     raise CustomExceptions::LoginRequired.new 'login required' unless @current_user
   end
 end

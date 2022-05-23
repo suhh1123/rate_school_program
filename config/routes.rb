@@ -10,10 +10,13 @@ Rails.application.routes.draw do
 
   # program routes
   resources :schools do
-    resources :programs, shallow: true
+    resources :programs, shallow: true, only: [:index, :create, :show]
   end
   resource :programs, only: [:show]
 
   # comment routes
-
+  resources :programs do
+    resources :comments, shallow: true, only: [:index, :create, :show]
+  end
+  resource :comments, only: [:show]
 end

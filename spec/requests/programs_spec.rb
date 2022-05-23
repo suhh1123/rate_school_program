@@ -9,7 +9,7 @@ RSpec.describe "Programs", type: :request do
       end
     end
 
-    context 'when the school exist' do
+    context 'when the school exists' do
       let(:programs) do
         school = FactoryBot.create :school
         count = 3
@@ -23,13 +23,18 @@ RSpec.describe "Programs", type: :request do
 
       it 'returns a proper JSON' do
         program = programs[0]
+        school = School.find(program.school_id)
         get "/schools/#{program.school_id}/programs"
         expect(response).to have_http_status(:ok)
         expected = json_data.first
         expect(expected[:id]).to eq(program.id.to_s)
         expect(expected[:type]).to eq('programs')
         expect(expected[:attributes]).to eq({
-                                               title: program.title
+                                               title: program.title,
+                                               school: {
+                                                 id: program.school_id,
+                                                 name: school.name
+                                               }
                                              })
       end
 
@@ -54,7 +59,7 @@ RSpec.describe "Programs", type: :request do
       }
     }
 
-    let(:school) { school = FactoryBot.create :school }
+    let(:school) { FactoryBot.create :school }
 
     let(:program) do
       program = FactoryBot.build :program

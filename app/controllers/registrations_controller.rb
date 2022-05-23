@@ -4,7 +4,6 @@ class RegistrationsController < ApplicationController
     user = User.new(user_params)
     user.password = params[:password]
     user.save! # will be rescue if saving didn't succeed
-    session[:user_id] = user.id
     render json: user, status: :created
   end
 

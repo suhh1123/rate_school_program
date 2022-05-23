@@ -16,7 +16,8 @@ RSpec.describe "Schools", type: :request do
                                           city: school.city,
                                           state: school.state,
                                           zipcode: school.zipcode,
-                                          country: school.country
+                                          country: school.country,
+                                          programs: []
                                         )
       end
 
