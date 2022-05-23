@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user, scope: :create
+  before_action :authenticate_user, only: [:create]
 
   def index
     program = Program.find_by!(id: params[:program_id])
