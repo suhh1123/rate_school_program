@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   has_many :comments
 
+  has_one_attached :avatar
+
   def password
     @password ||= Password.new(password_hash)
   end
