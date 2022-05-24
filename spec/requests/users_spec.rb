@@ -66,7 +66,7 @@ RSpec.describe "Users", type: :request do
           expected = json_data
           expect(expected[:id]).to eq(user.id.to_s)
           expect(expected[:type]).to eq('user')
-          expect(expected[:attributes]).to eq(
+          expect(expected[:attributes]).to include(
                                             {
                                               "first-name": user_params[:user][:first_name],
                                               "last-name": user_params[:user][:last_name],

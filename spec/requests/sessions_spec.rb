@@ -32,7 +32,7 @@ RSpec.describe "Sessions", type: :request do
         expect(response).to have_http_status(:created)
         expected = json_data
         expect(expected[:type]).to eq('user')
-        expect(expected[:attributes]).to eq({
+        expect(expected[:attributes]).to include({
                                               "first-name": user.first_name,
                                               "last-name": user.last_name,
                                               email: user.email,
@@ -64,7 +64,7 @@ RSpec.describe "Sessions", type: :request do
         get '/logged_in'
         expected = json_data
         expect(expected[:type]).to eq('user')
-        expect(expected[:attributes]).to eq({
+        expect(expected[:attributes]).to include({
                                               "first-name": user.first_name,
                                               "last-name": user.last_name,
                                               email: user.email,
