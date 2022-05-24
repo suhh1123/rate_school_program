@@ -17,11 +17,11 @@ class ProgramsController < ApplicationController
   def show
     if params.has_key? :id
       program = Program.find_by!(id: params[:id])
-      render json: program, status: :ok
+      render json: program, include: 'school', status: :ok
     else
       programs = Program.all
       @pagy, @record = pagy(programs)
-      render json: @record, status: :ok
+      render json: @record, include: 'school',status: :ok
     end
   end
 

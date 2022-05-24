@@ -32,7 +32,7 @@ RSpec.describe "Comments", type: :request do
         expect(response).to have_http_status(:ok)
         expected = json_data.first
         expect(expected[:id]).to eq(comment.id.to_s)
-        expect(expected[:type]).to eq('comments')
+        expect(expected[:type]).to eq('comment')
         expect(expected[:attributes]).to eq({
                                               title: comment.title,
                                               content: comment.content
@@ -158,7 +158,6 @@ RSpec.describe "Comments", type: :request do
     context 'when the comment id param is provided' do
       context 'when the comment does not exist' do
         it 'returns a not-found error' do
-          pp comment
           get "/comments/#{comment.id + 1}"
           expect(response).to have_http_status(:not_found)
         end

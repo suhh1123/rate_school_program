@@ -1,7 +1,7 @@
 class ProgramSerializer < ActiveModel::Serializer
-  attributes :title, :school
+  type :program
 
-  def school
-    object.school.slice(:id, :name)
-  end
+  attributes :title
+
+  has_one :school
 end

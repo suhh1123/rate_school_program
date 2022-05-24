@@ -9,15 +9,14 @@ RSpec.describe "Schools", type: :request do
         expect(response).to have_http_status(:ok)
         expected = json_data.first
         expect(expected[:id]).to eq(school.id.to_s)
-        expect(expected[:type]).to eq('schools')
+        expect(expected[:type]).to eq('school')
         expect(expected[:attributes]).to eq(
                                           name: school.name,
                                           address: school.address,
                                           city: school.city,
                                           state: school.state,
                                           zipcode: school.zipcode,
-                                          country: school.country,
-                                          programs: []
+                                          country: school.country
                                         )
       end
 

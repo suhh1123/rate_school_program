@@ -61,7 +61,7 @@ RSpec.describe "Registrations", type: :request do
         }
         expect(response).to have_http_status(:created)
         expected = json_data
-        expect(expected[:type]).to eq('users')
+        expect(expected[:type]).to eq('user')
         expect(expected[:attributes]).to eq({
                                               "first-name": 'sample_f_name_2',
                                               "last-name": 'sample_l_name_2',

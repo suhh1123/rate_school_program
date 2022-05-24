@@ -19,7 +19,7 @@ class SchoolsController < ApplicationController
 
   def show
     school = School.find_by!(id: params[:id])
-    render json: school, status: :ok
+    render json: school, include: 'programs', status: :ok
   end
 
   private

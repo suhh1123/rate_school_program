@@ -28,13 +28,9 @@ RSpec.describe "Programs", type: :request do
         expect(response).to have_http_status(:ok)
         expected = json_data.first
         expect(expected[:id]).to eq(program.id.to_s)
-        expect(expected[:type]).to eq('programs')
+        expect(expected[:type]).to eq('program')
         expect(expected[:attributes]).to eq({
-                                               title: program.title,
-                                               school: {
-                                                 id: program.school_id,
-                                                 name: school.name
-                                               }
+                                               title: program.title
                                              })
       end
 

@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     program = Program.find_by!(id: params[:program_id])
     comments = program.comments
     @pagy, @record = pagy(comments)
-    render json: @record, status: :ok
+    render json: @record, include: 'user', status: :ok
   end
 
   def create
@@ -14,17 +14,17 @@ class CommentsController < ApplicationController
     comment.program = program
     comment.user = @current_user
     comment.save!
-    render json: comment, status: :created
+    render json: comment, include: ['user', 'program'], status: :created
   end
 
   def show
     if params[:id]
       comment = Comment.find_by!(id: params[:id])
-      render json: comment, status: :ok
+      render json: comment, include: 'user', status: :ok
     else
       comments = Comment.all
       @pagy, @record = pagy(comments)
-      render json: @record, status: :ok
+      render json: @record, include: ['user', 'program'], status: :ok
     end
   end
 
