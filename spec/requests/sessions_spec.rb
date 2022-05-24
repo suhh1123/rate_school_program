@@ -33,10 +33,10 @@ RSpec.describe "Sessions", type: :request do
         expected = json_data
         expect(expected[:type]).to eq('user')
         expect(expected[:attributes]).to eq({
-                                              "first-name": 'sample_f_name',
-                                              "last-name": 'sample_l_name',
-                                              email: 'sample_email',
-                                              username: 'sample_username'
+                                              "first-name": user.first_name,
+                                              "last-name": user.last_name,
+                                              email: user.email,
+                                              username: user.username
                                             })
       end
     end
@@ -65,10 +65,10 @@ RSpec.describe "Sessions", type: :request do
         expected = json_data
         expect(expected[:type]).to eq('user')
         expect(expected[:attributes]).to eq({
-                                              "first-name": 'sample_f_name',
-                                              "last-name": 'sample_l_name',
-                                              email: 'sample_email',
-                                              username: 'sample_username'
+                                              "first-name": user.first_name,
+                                              "last-name": user.last_name,
+                                              email: user.email,
+                                              username: user.username
                                             })
       end
     end
