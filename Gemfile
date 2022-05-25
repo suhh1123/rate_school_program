@@ -40,9 +40,15 @@ gem "rack-cors"
 gem 'active_model_serializers', '~> 0.10.0'
 
 # Pagination
-# gem 'kaminari'
-# gem 'api-pagination'
 gem 'pagy', '~> 5.10'
+
+# Elastic Search
+gem 'elasticsearch', '~> 7.11.0'
+gem 'elasticsearch-rails', '~> 7.1.1'
+gem 'elasticsearch-model', '~> 7.1.1'
+gem 'elasticsearch-dsl'
+# gem 'elasticsearch-persistence'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

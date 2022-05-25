@@ -22,6 +22,20 @@ class SchoolsController < ApplicationController
     render json: school, include: 'programs', status: :ok
   end
 
+  def search
+    query = Elasticsearch::DSL::Search.search do
+      query do
+        match :name do
+          query params[:query]
+        end
+      end
+    end
+
+    resp = School.search(query)
+    schools = resp.results.map { |r| r._source }
+    render json: schools, status: :ok
+  end
+
   private
 
   def school_params

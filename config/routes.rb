@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   # school routes
   resources :schools, only: [:index, :create, :show]
+  get '/search/schools', to: "schools#search"
 
   # program routes
   resources :schools do
