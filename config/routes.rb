@@ -7,11 +7,12 @@ Rails.application.routes.draw do
 
   # user routes
   resources :users, only: [:show, :update]
-  put 'user/upload_avatar', to: "users#upload_avatar"
+  put '/user/upload_avatar', to: "users#upload_avatar"
 
   # school routes
   resources :schools, only: [:index, :create, :show]
   get '/search/schools', to: "schools#search"
+  put '/school/:id/upload_images', to: "schools#upload_images"
 
   # program routes
   resources :schools do

@@ -6,6 +6,8 @@ class School < ApplicationRecord
 
   has_many :programs
 
+  has_many_attached :images
+
   settings index: { number_of_shards: 1 } do
     mapping dynamic: false do
       indexes :name, analyzer: 'english'

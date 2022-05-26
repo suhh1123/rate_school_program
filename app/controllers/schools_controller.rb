@@ -37,6 +37,16 @@ class SchoolsController < ApplicationController
     render json: schools, status: :ok
   end
 
+  def upload_images
+    school = School.find_by!(id: params[:id])
+    if params[:images].present?
+      params[:images].each do |image|
+        school.images.attach(image)
+      end
+    end
+    render json: school, status: :ok
+  end
+
   private
 
   def school_params
