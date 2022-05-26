@@ -1,9 +1,4 @@
 class School < ApplicationRecord
-  before_create do
-    School.__elasticsearch__.create_index!
-    School.import
-  end
-
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
@@ -17,5 +12,4 @@ class School < ApplicationRecord
       indexes :city, analyzer: 'english'
     end
   end
-
 end

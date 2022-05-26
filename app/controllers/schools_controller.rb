@@ -25,8 +25,9 @@ class SchoolsController < ApplicationController
   def search
     query = Elasticsearch::DSL::Search.search do
       query do
-        match :name do
+        multi_match do
           query params[:query]
+          fields ['name^10', 'city']
         end
       end
     end
