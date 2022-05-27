@@ -246,6 +246,7 @@ DEPENDENCIES
   elasticsearch-model (~> 7.1.1)
   elasticsearch-rails (~> 7.1.1)
   factory_bot_rails
+  mail (~> 2.7)
   pagy (~> 5.10)
   puma (~> 5.0)
   rack-cors

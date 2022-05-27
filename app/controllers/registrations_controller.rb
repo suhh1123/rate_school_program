@@ -4,6 +4,7 @@ class RegistrationsController < ApplicationController
     user = User.new(user_params)
     user.password = params[:password]
     user.save! # will be rescue if saving didn't succeed
+    UserMailer.with(user: user).welcome_email.deliver_later
     render json: user, status: :created
   end
 

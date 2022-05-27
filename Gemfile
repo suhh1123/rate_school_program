@@ -49,6 +49,9 @@ gem 'elasticsearch-model', '~> 7.1.1'
 gem 'elasticsearch-dsl'
 # gem 'elasticsearch-persistence'
 
+# Mailer
+gem 'mail', '~> 2.7'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
