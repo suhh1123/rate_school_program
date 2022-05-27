@@ -52,6 +52,9 @@ gem 'elasticsearch-dsl'
 # Mailer
 gem 'mail', '~> 2.7'
 
+# Environment Variable
+gem 'figaro'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
