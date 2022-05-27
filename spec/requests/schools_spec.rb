@@ -10,7 +10,7 @@ RSpec.describe "Schools", type: :request do
         expected = json_data.first
         expect(expected[:id]).to eq(school.id.to_s)
         expect(expected[:type]).to eq('school')
-        expect(expected[:attributes]).to eq(
+        expect(expected[:attributes]).to include(
                                           name: school.name,
                                           address: school.address,
                                           city: school.city,
