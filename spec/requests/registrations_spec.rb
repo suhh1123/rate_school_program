@@ -15,7 +15,7 @@ RSpec.describe "Registrations", type: :request do
           registration: {
             first_name: user.first_name,
             last_name: user.last_name,
-            email: 'second_email',
+            email: 'second-sample@example.com',
             password: user.password
           }
         }
@@ -54,7 +54,7 @@ RSpec.describe "Registrations", type: :request do
           registration: {
             first_name: 'sample_f_name_2',
             last_name: 'sample_l_name_2',
-            email: 'sample_email_2',
+            email: 'sample-email-2@example.com',
             username: 'sample_username_2',
             password: 'sample_password_2'
           }
@@ -65,7 +65,7 @@ RSpec.describe "Registrations", type: :request do
         expect(expected[:attributes]).to include({
                                               "first-name": 'sample_f_name_2',
                                               "last-name": 'sample_l_name_2',
-                                              email: 'sample_email_2',
+                                              email: 'sample-email-2@example.com',
                                               username: 'sample_username_2'
                                             })
       end

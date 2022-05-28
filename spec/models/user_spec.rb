@@ -36,6 +36,12 @@ RSpec.describe User, type: :model do
       expect(second_user).not_to be_valid
       expect(second_user.errors.messages[:email]).to include("has already been taken")
     end
+
+    it 'is invalid with invalid email format' do
+      user.email = 'invalid_email'
+      expect(user).not_to be_valid
+      expect(user.errors.messages[:email]).to include("is invalid")
+    end
   end
 
   describe '#association' do

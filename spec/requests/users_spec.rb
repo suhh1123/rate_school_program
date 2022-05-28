@@ -30,7 +30,7 @@ RSpec.describe "Users", type: :request do
         user: {
           first_name: 'modified_f_name',
           last_name: 'modified_l_name',
-          email: 'modified_email'
+          email: 'modified@example.com'
         }
       }
     }

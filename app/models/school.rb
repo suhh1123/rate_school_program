@@ -3,6 +3,7 @@ class School < ApplicationRecord
   include Elasticsearch::Model::Callbacks
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :zipcode, format: { with: /\A[0-9]{5}(?:-[0-9]{4})?\z/ }
 
   has_many :programs
 

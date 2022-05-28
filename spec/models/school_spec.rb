@@ -26,6 +26,12 @@ RSpec.describe School, type: :model do
       second_school.name = school.name.swapcase
       expect(second_school).not_to be_valid
     end
+
+    it 'is invalid with invalid zipcode format' do
+      school.zipcode = "invalid_zipcode"
+      expect(school).not_to be_valid
+      expect(school.errors.messages[:zipcode]).to include("is invalid")
+    end
   end
 
   describe '#association' do
