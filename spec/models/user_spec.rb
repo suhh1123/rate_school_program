@@ -49,6 +49,12 @@ RSpec.describe User, type: :model do
       t = described_class.reflect_on_association(:comments)
       expect(t.macro).to eq(:has_many)
     end
+
+    it 'should have many favorite comments' do
+      t = described_class.reflect_on_association(:favorite_comments)
+      pp t.macro
+      expect(t.macro).to eq(:has_many)
+    end
   end
 
   describe '.password' do

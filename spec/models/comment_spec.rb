@@ -36,5 +36,10 @@ RSpec.describe Comment, type: :model do
       t = described_class.reflect_on_association(:program)
       expect(t.macro).to eq(:belongs_to)
     end
+
+    it 'should have many admirers' do
+      t = described_class.reflect_on_association(:admirers)
+      expect(t.macro).to eq(:has_many)
+    end
   end
 end

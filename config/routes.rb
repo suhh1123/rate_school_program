@@ -25,4 +25,8 @@ Rails.application.routes.draw do
     resources :comments, shallow: true, only: [:index, :create, :show]
   end
   resource :comments, only: [:show]
+  get '/posted_comments', to: "comments#show_posted_comments"
+  get '/favorite_comments', to: "comments#show_favorite_comments"
+  post '/comments/:id/favor', to: "comments#favor"
+  delete '/comments/:id/disfavor', to: "comments#disfavor"
 end

@@ -11,6 +11,8 @@ class User < ApplicationRecord
   validates :email, format: { with: VALID_EMAIL_REGEX, multiline: true }
 
   has_many :comments
+  has_many :favorites
+  has_many :favorite_comments, through: :favorites, source: :comment
 
   has_one_attached :avatar
 

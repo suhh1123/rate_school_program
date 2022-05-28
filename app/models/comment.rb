@@ -4,4 +4,6 @@ class Comment < ApplicationRecord
 
   belongs_to :user
   belongs_to :program
+  has_many :favorites
+  has_many :admirers, through: :favorites, source: :user
 end

@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user, only: [:create]
+  before_action :authenticate_user, only: [:create, :favor, :disfavor]
 
   def index
     program = Program.find_by!(id: params[:program_id])
@@ -26,6 +26,28 @@ class CommentsController < ApplicationController
       @pagy, @record = pagy(comments)
       render json: @record, include: ['user', 'program'], status: :ok
     end
+  end
+
+  def show_posted_comments
+    @pagy, @record = pagy(@current_user.comments)
+    render json: @record, status: :ok
+  end
+
+  def show_favorite_comments
+    @pagy, @record = pagy(@current_user.favorite_comments)
+    render json: @record, status: :ok
+  end
+
+  def favor
+    comment = Comment.find_by!(id: params[:id])
+    @current_user.favorite_comments.append(comment)
+    render json: comment, status: :ok
+  end
+
+  def disfavor
+    comment = Comment.find_by!(id: params[:id])
+    @current_user.favorite_comments.delete(comment)
+    render json: comment, status: :ok
   end
 
   private
