@@ -37,7 +37,7 @@ module RateSchoolProgram
     config.api_only = true
 
     # serializer adapter
-    ActiveModelSerializers.config.adapter = ActiveModelSerializers::Adapter::JsonApi
+    # ActiveModelSerializers.config.adapter = ActiveModelSerializers::Adapter::Json
 
     # turn on eager-loading on lib directory
     config.autoload_paths += %W(#{config.root}/lib)

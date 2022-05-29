@@ -3,7 +3,7 @@ class SchoolSerializer < ActiveModel::Serializer
 
   type :school
 
-  attributes :name, :address, :city, :state, :zipcode, :country, :images
+  attributes :id, :name, :address, :city, :state, :zipcode, :country, :images
 
   def images
     if object.images.attached?

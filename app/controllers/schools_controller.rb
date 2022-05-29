@@ -8,13 +8,13 @@ class SchoolsController < ApplicationController
       schools = School.all
     end
     @pagy, @records = pagy(schools)
-    render json: @records, status: :ok
+    render json: @records, include: '', status: :ok
   end
 
   def create
     school = School.new(school_params)
     school.save!
-    render json: school, status: :created
+    render json: school, include: '', status: :created
   end
 
   def show
@@ -33,8 +33,8 @@ class SchoolsController < ApplicationController
     end
 
     resp = School.search(query)
-    schools = resp.results.map { |r| r._source }
-    render json: schools, status: :ok
+    schools = resp.records.to_a
+    render json: schools, include: '', status: :ok
   end
 
   def upload_images
@@ -44,7 +44,7 @@ class SchoolsController < ApplicationController
         school.images.attach(image)
       end
     end
-    render json: school, status: :ok
+    render json: school, include: '', status: :ok
   end
 
   private

@@ -3,7 +3,7 @@ class ProgramsController < ApplicationController
     school = School.find_by!(id: params[:school_id])
     programs = school.programs
     @pagy, @record = pagy(programs)
-    render json: @record, status: :ok
+    render json: @record, include: '', status: :ok
   end
 
   def create
@@ -11,7 +11,7 @@ class ProgramsController < ApplicationController
     program = Program.new(program_params)
     program.school = school
     program.save!
-    render json: program, status: :created
+    render json: program, include: 'school', status: :created
   end
 
   def show
@@ -21,7 +21,7 @@ class ProgramsController < ApplicationController
     else
       programs = Program.all
       @pagy, @record = pagy(programs)
-      render json: @record, include: 'school',status: :ok
+      render json: @record, include: 'school', status: :ok
     end
   end
 

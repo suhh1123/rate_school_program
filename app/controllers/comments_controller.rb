@@ -30,24 +30,24 @@ class CommentsController < ApplicationController
 
   def show_posted_comments
     @pagy, @record = pagy(@current_user.comments)
-    render json: @record, status: :ok
+    render json: @record, include: 'program.school', status: :ok
   end
 
   def show_favorite_comments
     @pagy, @record = pagy(@current_user.favorite_comments)
-    render json: @record, status: :ok
+    render json: @record, include: 'program.school', status: :ok
   end
 
   def favor
     comment = Comment.find_by!(id: params[:id])
     @current_user.favorite_comments.append(comment)
-    render json: comment, status: :ok
+    render json: comment, include: '', status: :ok
   end
 
   def disfavor
     comment = Comment.find_by!(id: params[:id])
     @current_user.favorite_comments.delete(comment)
-    render json: comment, status: :ok
+    render json: comment, include: '', status: :ok
   end
 
   private
