@@ -60,14 +60,15 @@ RSpec.describe "Registrations", type: :request do
           }
         }
         expect(response).to have_http_status(:created)
-        expected = json_data
-        expect(expected[:type]).to eq('user')
-        expect(expected[:attributes]).to include({
-                                              "first-name": 'sample_f_name_2',
-                                              "last-name": 'sample_l_name_2',
-                                              email: 'sample-email-2@example.com',
-                                              username: 'sample_username_2'
-                                            })
+        expected = JSON.parse(response.body).deep_symbolize_keys
+        expect(expected).to include(
+                              {
+                                first_name: 'sample_f_name_2',
+                                last_name: 'sample_l_name_2',
+                                email: 'sample-email-2@example.com',
+                                username: 'sample_username_2'
+                              }
+                            )
       end
     end
   end

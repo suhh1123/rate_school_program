@@ -26,17 +26,18 @@ RSpec.describe "Programs", type: :request do
         school = School.find(program.school_id)
         get "/schools/#{program.school_id}/programs"
         expect(response).to have_http_status(:ok)
-        expected = json_data.first
-        expect(expected[:id]).to eq(program.id.to_s)
-        expect(expected[:type]).to eq('program')
-        expect(expected[:attributes]).to eq({
-                                               title: program.title
-                                             })
+        expected = JSON.parse(response.body).first.deep_symbolize_keys
+        expect(expected).to include(
+                              {
+                                id: program.id,
+                                title: program.title
+                              }
+                            )
       end
 
       it 'paginates results' do
         get "/schools/#{programs[0].school_id}/programs"
-        expect(response.header["Page-Items"]).to eq(json_data.length.to_s)
+        expect(response.header["Page-Items"]).to eq(JSON.parse(response.body).length.to_s)
       end
 
       it 'contains pagination links in the header' do
@@ -128,7 +129,7 @@ RSpec.describe "Programs", type: :request do
         second_program.save
         get "/programs"
         expect(response).to have_http_status(:ok)
-        expect(json_data.length).to eq(2)
+        expect(JSON.parse(response.body).length).to eq(2)
       end
     end
   end

@@ -30,18 +30,18 @@ RSpec.describe "Comments", type: :request do
         comment = comments[0]
         get "/programs/#{comment.program_id}/comments"
         expect(response).to have_http_status(:ok)
-        expected = json_data.first
-        expect(expected[:id]).to eq(comment.id.to_s)
-        expect(expected[:type]).to eq('comment')
-        expect(expected[:attributes]).to eq({
-                                              title: comment.title,
-                                              content: comment.content
-                                            })
+        expected = JSON.parse(response.body).first.deep_symbolize_keys
+        expect(expected).to include(
+                              {
+                                title: comment.title,
+                                content: comment.content
+                              }
+                            )
       end
 
       it 'paginates results' do
         get "/programs/#{comments[0].program_id}/comments"
-        expect(response.header["Page-Items"]).to eq(json_data.length.to_s)
+        expect(response.header["Page-Items"]).to eq(JSON.parse(response.body).length.to_s)
       end
 
       it 'contains pagination links in the header' do
@@ -175,7 +175,7 @@ RSpec.describe "Comments", type: :request do
       it 'returns all comments in pagination' do
         get "/comments"
         expect(response).to have_http_status(:ok)
-        expect(json_data.length).to eq(1)
+        expect(JSON.parse(response.body).length).to eq(1)
       end
     end
   end

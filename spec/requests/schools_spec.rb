@@ -7,23 +7,23 @@ RSpec.describe "Schools", type: :request do
         school = FactoryBot.create :school
         get '/schools'
         expect(response).to have_http_status(:ok)
-        expected = json_data.first
-        expect(expected[:id]).to eq(school.id.to_s)
-        expect(expected[:type]).to eq('school')
-        expect(expected[:attributes]).to include(
-                                          name: school.name,
-                                          address: school.address,
-                                          city: school.city,
-                                          state: school.state,
-                                          zipcode: school.zipcode,
-                                          country: school.country
-                                        )
+        expected = JSON.parse(response.body).first.deep_symbolize_keys
+        expect(expected).to include(
+                              {
+                                name: school.name,
+                                address: school.address,
+                                city: school.city,
+                                state: school.state,
+                                zipcode: school.zipcode,
+                                country: school.country
+                              }
+                            )
       end
 
       it 'paginates results' do
         school1, school2, school3 = FactoryBot.create_list :school, 3
         get '/schools'
-        expect(response.header["Page-Items"]).to eq(json_data.length.to_s)
+        expect(response.header["Page-Items"]).to eq(JSON.parse(response.body).length.to_s)
       end
 
       it 'contains pagination links in the header' do
@@ -39,7 +39,7 @@ RSpec.describe "Schools", type: :request do
         second_school = FactoryBot.create :school, country: 'China'
         get '/schools', params: { country: first_school.country }
         expect(response).to have_http_status(:ok)
-        expected = json_data
+        expected = JSON.parse(response.body)
         expect(expected.size).to eq(1)
       end
     end
@@ -50,12 +50,10 @@ RSpec.describe "Schools", type: :request do
         second_school = FactoryBot.create :school, country: 'United State', state: 'CA'
         get '/schools', params: { country: first_school.country, state: first_school.state }
         expect(response).to have_http_status(:ok)
-        expected = json_data
+        expected = JSON.parse(response.body)
         expect(expected.size).to eq(1)
       end
     end
-
-
   end
 
   describe "POST /create" do

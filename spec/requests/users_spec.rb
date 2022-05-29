@@ -63,17 +63,15 @@ RSpec.describe "Users", type: :request do
         it 'returns an ok status' do
           put "/users/#{user.id}", params: user_params
           expect(response).to have_http_status(:ok)
-          expected = json_data
-          expect(expected[:id]).to eq(user.id.to_s)
-          expect(expected[:type]).to eq('user')
-          expect(expected[:attributes]).to include(
-                                            {
-                                              "first-name": user_params[:user][:first_name],
-                                              "last-name": user_params[:user][:last_name],
-                                              email: user_params[:user][:email],
-                                              username: user.username
-                                            }
-                                          )
+          expected = JSON.parse(response.body).deep_symbolize_keys
+          expect(expected).to include(
+                                {
+                                  first_name: user_params[:user][:first_name],
+                                  last_name: user_params[:user][:last_name],
+                                  email: user_params[:user][:email],
+                                  username: user.username
+                                }
+                              )
         end
       end
     end

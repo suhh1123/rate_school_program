@@ -30,14 +30,15 @@ RSpec.describe "Sessions", type: :request do
         expect(session[:user_id]).to eq(user.id)
         expect(cookies[:username]).to eq(user.username)
         expect(response).to have_http_status(:created)
-        expected = json_data
-        expect(expected[:type]).to eq('user')
-        expect(expected[:attributes]).to include({
-                                              "first-name": user.first_name,
-                                              "last-name": user.last_name,
-                                              email: user.email,
-                                              username: user.username
-                                            })
+        expected = JSON.parse(response.body).deep_symbolize_keys
+        expect(expected).to include(
+                              {
+                                first_name: user.first_name,
+                                last_name: user.last_name,
+                                email: user.email,
+                                username: user.username
+                              }
+                            )
       end
     end
   end
@@ -62,14 +63,15 @@ RSpec.describe "Sessions", type: :request do
         expect(response).to have_http_status(:created)
 
         get '/logged_in'
-        expected = json_data
-        expect(expected[:type]).to eq('user')
-        expect(expected[:attributes]).to include({
-                                              "first-name": user.first_name,
-                                              "last-name": user.last_name,
-                                              email: user.email,
-                                              username: user.username
-                                            })
+        expected = JSON.parse(response.body).deep_symbolize_keys
+        expect(expected).to include(
+                              {
+                                first_name: user.first_name,
+                                last_name: user.last_name,
+                                email: user.email,
+                                username: user.username
+                              }
+                            )
       end
     end
 
