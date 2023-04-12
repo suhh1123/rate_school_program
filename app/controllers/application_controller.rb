@@ -33,6 +33,9 @@ class ApplicationController < ActionController::API
       @current_user = User.find_by(id: session[:user_id])
     end
   end
+  
+  def func
+  end
 
   def authenticate_user
     raise CustomExceptions::LoginRequired.new 'login required' unless @current_user
